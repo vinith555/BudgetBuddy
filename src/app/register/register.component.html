@@ -1,0 +1,64 @@
+<div class="flex justify-center items-center h-screen bg-gradient-to-br from-blue-400 to-blue-600">
+    <div class="flex flex-col items-center sm:p-8 p-6 rounded-xl shadow-lg bg-white sm:w-[350px] w-[280px]">
+        <div class="text-center mb-6">
+            <h1 class="text-3xl font-bold text-[#2E8A99]">Register</h1>
+        </div>
+        <form (ngSubmit)="register(form)" action="" class="space-y-4 w-full" #form = "ngForm">
+            <div class="w-full">
+                <label for="email" class="block text-left text-gray-700 font-medium mb-1">Email</label>
+                <input 
+                    id="email" 
+                    type="email" 
+                    class="border-2 border-blue-300 rounded-md h-10 w-full px-3 focus:outline-none focus:ring-2 focus:ring-[#2E8A99]" 
+                    name="email" 
+                    placeholder="Enter email"
+                    required
+                    email
+                    ngModel
+                    #email = "ngModel">
+            </div>
+            @if (email.touched &&!email.valid) {
+                <p class="text-[#D21312]">Enter correct email !</p>
+            }
+            <div class="w-full">
+                <label for="password" class="block text-left text-gray-700 font-medium mb-1">Password</label>
+                <input 
+                    id="password" 
+                    type="password" 
+                    class="border-2 border-blue-300 rounded-md h-10 w-full px-3 focus:outline-none focus:ring-2 focus:ring-[#2E8A99]" 
+                    name="password" 
+                    placeholder="Enter password"
+                    ngModel
+                    required
+                    #pass = "ngModel">
+            </div>
+            @if (pass.touched && !pass.valid) {
+                <p class="text-[#D21312]">Enter password !</p>
+            }
+            <div class="w-full">
+                <label for="confirmpassword" class="block text-left text-gray-700 font-medium mb-1">Confirm Password</label>
+                <input 
+                    id="confirmpassword" 
+                    type="confirmpassword" 
+                    class="border-2 border-blue-300 rounded-md h-10 w-full px-3 focus:outline-none focus:ring-2 focus:ring-[#2E8A99]" 
+                    name="confirmpassword" 
+                    placeholder="Enter confirm password"
+                    ngModel
+                    required
+                    #confirmpass = "ngModel">
+            </div>
+            @if (confirmpass.touched && !confirmpass.valid) {
+                <p class="text-[#D21312]">Enter confirm password !</p>
+            }
+            <button 
+                class="w-full bg-[#2E8A99] text-white py-2 rounded-md shadow-md hover:bg-[#257A80] hover:shadow-lg transition duration-300"
+                [disabled]="!form.valid">
+                Register
+            </button>
+        </form>
+        <div class="flex justify-between w-full text-sm text-gray-500 mt-4">
+            <a href="#" class="hover:underline">Forgot Password?</a>
+            <a routerLink="" class="hover:underline">Go to login</a>
+        </div>
+    </div>
+</div>
