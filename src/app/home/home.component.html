@@ -1,22 +1,73 @@
-<div class="bg-[#A9D4DB] min-h-screen mx-height-auto flex flex-col items-center">
-    <div 
+<body class="bg-[#A9D4DB] min-h-screen mx-height-auto flex flex-col items-center">
+  <div 
     class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 bg-white border-l-4 border-[#2E8A99] text-[#1E3A47] shadow-lg px-6 py-4 rounded-md w-[90%] max-w-md bounce-in-top"
-    *ngIf="dispPLay"
-  >
+    *ngIf="dispPLay">
     <h1 class="font-semibold text-lg">WELCOME {{name}}! 🎉</h1>
     <p class="text-sm mt-1">Start managing your finances like a pro!</p>
   </div>
-  
+<section class="mt-[50px] flex flex-wrap gap-x-6 gap-y-6 justify-between px-[100px]">   
 
-    <div class="mt-[150px] grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-24 justify-items-center w-full"> 
+  <div class="w-[580px] h-80">
+    <div class="grid grid-cols-2 w-full px-4 py-2 justify-items-center">
+      <div class="bg-white w-24 h-24 ">
+      </div>
+      <div class="bg-white w-24 h-24 ">
+      </div>
+    </div>
+    <div class="grid grid-cols-2 w-full px-4 py-2 justify-items-center">
+      <div class="bg-white w-24 h-24 ">
+      </div>
+      <div class="bg-white w-24 h-24 ">
+      </div>
+    </div>
+    <div class="grid grid-cols-2 w-full px-4 py-2 justify-items-center">
+      <div class="bg-white w-24 h-24 ">
+      </div>
+      <div class="bg-white w-24 h-24 ">
+      </div>
+    </div>
+  </div>
+
+
+
+
+      <div class="bg-white h-80 w-[580px] rounded-xl shadow-lg p-4">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold text-gray-800">Summary 📊</h2>
+      </div>
+      <div class="max-h-60 overflow-y-auto custom-scrollbar rounded-md border border-gray-200">
+        <table class="w-full table-auto border-collapse text-sm">
+          <thead class="bg-[#2E8A99] text-white sticky top-0 z-10">
+            <tr>
+              <th class="py-3 px-4 text-left">Date</th>
+              <th class="py-3 px-4 text-left">Category</th>
+              <th class="py-3 px-4 text-left">Amount</th>
+              <th class="py-3 px-4 text-left">Payment Method</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of budgetData; track $index) {
+            <tr class="odd:bg-gray-100 even:bg-white hover:bg-gray-200 transition-colors">
+              <td class="py-2 px-4">{{item.date}}</td>
+              <td class="py-2 px-4">{{item.category}}</td>
+              <td class="py-2 px-4">{{item.amount}}</td>
+              <td class="py-2 px-4">{{item.paymentMethod}}</td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      
+        </div> 
         <div class="bg-white h-80 w-[580px] rounded-xl shadow-lg p-4">
             <div class="flex justify-between items-center mb-4">
               <h2 class="text-2xl font-bold text-gray-800">What You Spent💸</h2>
-              <button class="py-2 px-4 text-sm font-semibold border-2 border-[#2E8A99] text-[#2E8A99] rounded-md hover:bg-[#2E8A99] hover:text-white transition-colors duration-300">
-                Add New Expense
-              </button>
+              <div class="gap-x-6">
+                <button class="py-2 px-4 text-sm font-semibold border-2 border-[#2E8A99] text-[#2E8A99] rounded-md hover:bg-[#2E8A99] hover:text-white transition-colors duration-300">
+                  Add New Expense
+                </button>
+              </div>
             </div>
-          
             <div class="max-h-60 overflow-y-auto custom-scrollbar rounded-md border border-gray-200">
               <table class="w-full table-auto border-collapse text-sm">
                 <thead class="bg-[#2E8A99] text-white sticky top-0 z-10">
@@ -72,33 +123,5 @@
             </div>
             
         </div>
-        <div class="bg-white h-80 w-[580px] rounded-xl shadow-lg p-4">
-            <div class="flex justify-between items-center mb-4">
-              <h2 class="text-2xl font-bold text-gray-800">Summary 📊</h2>
-            </div>
-            <div class="max-h-60 overflow-y-auto custom-scrollbar rounded-md border border-gray-200">
-              <table class="w-full table-auto border-collapse text-sm">
-                <thead class="bg-[#2E8A99] text-white sticky top-0 z-10">
-                  <tr>
-                    <th class="py-3 px-4 text-left">Date</th>
-                    <th class="py-3 px-4 text-left">Category</th>
-                    <th class="py-3 px-4 text-left">Amount</th>
-                    <th class="py-3 px-4 text-left">Payment Method</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @for (item of budgetData; track $index) {
-                  <tr class="odd:bg-gray-100 even:bg-white hover:bg-gray-200 transition-colors">
-                    <td class="py-2 px-4">{{item.date}}</td>
-                    <td class="py-2 px-4">{{item.category}}</td>
-                    <td class="py-2 px-4">{{item.amount}}</td>
-                    <td class="py-2 px-4">{{item.paymentMethod}}</td>
-                  </tr>
-                  }
-                </tbody>
-              </table>
-            </div>
-            
-        </div>
-    </div>
-</div>
+  </section>
+</body>
