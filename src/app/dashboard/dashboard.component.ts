@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnChanges, SimpleChanges } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -7,6 +7,16 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
-
+export class DashboardComponent{
+ displayToggle:boolean = false;
+ @HostListener('window:resize',['$event'])onResize(event:any){
+  const width = event.target.innerWidth;
+  if(width < 820){
+    this.displayToggle = true;
+  }else{
+    this.displayToggle = false;
+  } 
+    console.log(event.target.innerWidth);
+    
+ };
 }

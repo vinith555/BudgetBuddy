@@ -27,7 +27,6 @@ ngOnInit(): void {
     setTimeout(()=>{
       this.dispPLay = false;
     },5000);
-    console.log("ngOnint");
-    
-}
+    console.log("ngOnint");  
+  }
 }

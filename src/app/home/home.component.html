@@ -5,65 +5,62 @@
     <h1 class="font-semibold text-lg">WELCOME {{name}}! 🎉</h1>
     <p class="text-sm mt-1">Start managing your finances like a pro!</p>
   </div>
-<section class="mt-[50px] flex flex-wrap gap-x-6 gap-y-6 justify-between px-[100px]">   
-
-  <div class="w-[580px] h-80">
-    <div class="grid grid-cols-2 w-full px-4 py-2 justify-items-center">
-      <div class="bg-white w-24 h-24 ">
-      </div>
-      <div class="bg-white w-24 h-24 ">
-      </div>
+<section class="mt-[50px] flex flex-wrap gap-y-20 gap-x-20 justify-center lg:px-[120px]">   
+    <div class="md:w-[580px] sm:w-[400px] w-[350px] h-80 content-center">
+          <div class="grid grid-cols-2 w-full px-4 py-2 justify-items-center">
+            <div class="bg-white md:w-[200px] w-[120px] h-24 rounded-md shadow-lg content-center">
+              <p class="text-gray-600 text-center">Total Income</p>
+              <h1 class="font-bold text-green-600 text-2xl text-center">7,200</h1>
+            </div>
+            <div class="bg-white md:w-[200px] w-[120px] h-24 rounded-md shadow-lg content-center">
+              <p class="text-gray-600 text-center">Total Expenses</p>
+              <h1 class="font-bold text-red-600 text-2xl text-center">7,200</h1>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 w-full px-4 py-2 justify-items-center">
+            <div class="bg-white md:w-[200px] w-[120px] h-24 rounded-md shadow-lg content-center">
+              <p class="text-gray-600 text-center">Total Savings</p>
+              <h1 class="font-bold text-blue-600 text-2xl text-center">7,200</h1>
+            </div>
+            <div class="bg-white md:w-[200px] w-[120px] h-24 rounded-md shadow-lg content-center">
+              <p class="text-gray-600 text-center">Highest Transaction</p>
+              <h1 class="font-bold text-yellow-600 text-2xl text-center">7,200</h1>
+            </div>
+          </div>
+          
     </div>
-    <div class="grid grid-cols-2 w-full px-4 py-2 justify-items-center">
-      <div class="bg-white w-24 h-24 ">
-      </div>
-      <div class="bg-white w-24 h-24 ">
-      </div>
-    </div>
-    <div class="grid grid-cols-2 w-full px-4 py-2 justify-items-center">
-      <div class="bg-white w-24 h-24 ">
-      </div>
-      <div class="bg-white w-24 h-24 ">
-      </div>
-    </div>
-  </div>
-
-
-
-
-      <div class="bg-white h-80 w-[580px] rounded-xl shadow-lg p-4">
+    <div class="bg-white h-80 md:w-[580px] sm:w-[400px] w-[350px] rounded-xl shadow-lg p-4">
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-2xl font-bold text-gray-800">Summary 📊</h2>
+        <h2 class="md:text-2xl text-xl font-bold text-gray-800">Summary 📊</h2>
       </div>
       <div class="max-h-60 overflow-y-auto custom-scrollbar rounded-md border border-gray-200">
         <table class="w-full table-auto border-collapse text-sm">
           <thead class="bg-[#2E8A99] text-white sticky top-0 z-10">
             <tr>
-              <th class="py-3 px-4 text-left">Date</th>
-              <th class="py-3 px-4 text-left">Category</th>
-              <th class="py-3 px-4 text-left">Amount</th>
-              <th class="py-3 px-4 text-left">Payment Method</th>
+              <th class="md:py-3 md:px-4 py-1 px-2 text-left">Date</th>
+              <th class="md:py-3 md:px-4 py-1 px-2 text-left">Category</th>
+              <th class="md:py-3 md:px-4 py-1 px-2 text-left">Amount</th>
+              <th class="md:py-3 md:px-4 py-1 px-2 text-left">Payment Method</th>
             </tr>
           </thead>
           <tbody>
             @for (item of budgetData; track $index) {
             <tr class="odd:bg-gray-100 even:bg-white hover:bg-gray-200 transition-colors">
-              <td class="py-2 px-4">{{item.date}}</td>
-              <td class="py-2 px-4">{{item.category}}</td>
-              <td class="py-2 px-4">{{item.amount}}</td>
-              <td class="py-2 px-4">{{item.paymentMethod}}</td>
+              <td class="md:py-2 md:px-4 py-1 px-2">{{item.date}}</td>
+              <td class="md:py-2 md:px-4 py-1 px-2">{{item.category}}</td>
+              <td class="md:py-2 md:px-4 py-1 px-2">{{item.amount}}</td>
+              <td class="md:py-2 md:px-4 py-1 px-2">{{item.paymentMethod}}</td>
             </tr>
             }
           </tbody>
         </table>
       </div>
-      
-        </div> 
-        <div class="bg-white h-80 w-[580px] rounded-xl shadow-lg p-4">
+    </div> 
+    <div class="bg-white h-80 md:w-[580px] sm:w-[400px] w-[350px] rounded-xl shadow-lg p-4">
             <div class="flex justify-between items-center mb-4">
-              <h2 class="text-2xl font-bold text-gray-800">What You Spent💸</h2>
+              <h2 class="md:text-2xl text-xl font-bold text-gray-800">What You Spent💸</h2>
               <div class="gap-x-6">
-                <button class="py-2 px-4 text-sm font-semibold border-2 border-[#2E8A99] text-[#2E8A99] rounded-md hover:bg-[#2E8A99] hover:text-white transition-colors duration-300">
+                <button class="md:py-2 md:px-4 md:text-sm py-2 px-2 text-xs font-semibold border-2 border-[#2E8A99] text-[#2E8A99] rounded-md hover:bg-[#2E8A99] hover:text-white transition-colors duration-300">
                   Add New Expense
                 </button>
               </div>
@@ -72,29 +69,29 @@
               <table class="w-full table-auto border-collapse text-sm">
                 <thead class="bg-[#2E8A99] text-white sticky top-0 z-10">
                   <tr>
-                    <th class="py-3 px-4 text-left">Date</th>
-                    <th class="py-3 px-4 text-left">Category</th>
-                    <th class="py-3 px-4 text-left">Amount</th>
-                    <th class="py-3 px-4 text-left">Payment Method</th>
+                    <th class="md:py-3 md:px-4 py-1 px-2 text-left">Date</th>
+                    <th class="md:py-3 md:px-4 py-1 px-2 text-left">Category</th>
+                    <th class="md:py-3 md:px-4 py-1 px-2 text-left">Amount</th>
+                    <th class="md:py-3 md:px-4 py-1 px-2 text-left">Payment Method</th>
                   </tr>
                 </thead>
                 <tbody>
                   @for (item of budgetData; track $index) {
                   <tr class="odd:bg-gray-100 even:bg-white hover:bg-gray-200 transition-colors">
-                    <td class="py-2 px-4">{{item.date}}</td>
-                    <td class="py-2 px-4">{{item.category}}</td>
-                    <td class="py-2 px-4">{{item.amount}}</td>
-                    <td class="py-2 px-4">{{item.paymentMethod}}</td>
+                    <td class="md:py-2 md:px-4 py-1 px-2">{{item.date}}</td>
+                    <td class="md:py-2 md:px-4 py-1 px-2">{{item.category}}</td>
+                    <td class="md:py-2 md:px-4 py-1 px-2">{{item.amount}}</td>
+                    <td class="md:py-2 md:px-4 py-1 px-2">{{item.paymentMethod}}</td>
                   </tr>
                   }
                 </tbody>
               </table>
             </div>
-        </div>
-        <div class="bg-white h-80 w-[580px] rounded-xl shadow-lg p-4">
+    </div>
+    <div class="bg-white h-80 md:w-[580px] sm:w-[400px] w-[350px] rounded-xl shadow-lg p-4">
             <div class="flex justify-between items-center mb-4">
-              <h2 class="text-2xl font-bold text-gray-800">What You Made💼</h2>
-              <button class="py-2 px-4 text-sm font-semibold border-2 border-[#2E8A99] text-[#2E8A99] rounded-md hover:bg-[#2E8A99] hover:text-white transition-colors duration-300">
+              <h2 class="md:text-2xl text-xl font-bold text-gray-800">What You Made💼</h2>
+              <button class="md:py-2 md:px-4 md:text-sm py-2 px-2 text-xs font-semibold border-2 border-[#2E8A99] text-[#2E8A99] rounded-md hover:bg-[#2E8A99] hover:text-white transition-colors duration-300">
                 Add Income Source
               </button>
             </div>
@@ -103,25 +100,25 @@
               <table class="w-full table-auto border-collapse text-sm">
                 <thead class="bg-[#2E8A99] text-white sticky top-0 z-10">
                   <tr>
-                    <th class="py-3 px-4 text-left">Date</th>
-                    <th class="py-3 px-4 text-left">Category</th>
-                    <th class="py-3 px-4 text-left">Amount</th>
-                    <th class="py-3 px-4 text-left">Payment Method</th>
+                    <th class="md:py-3 md:px-4 py-1 px-2 text-left">Date</th>
+                    <th class="md:py-3 md:px-4 py-1 px-2 text-left">Category</th>
+                    <th class="md:py-3 md:px-4 py-1 px-2 text-left">Amount</th>
+                    <th class="md:py-3 md:px-4 py-1 px-2 text-left">Payment Method</th>
                   </tr>
                 </thead>
                 <tbody>
                   @for (item of budgetData; track $index) {
                   <tr class="odd:bg-gray-100 even:bg-white hover:bg-gray-200 transition-colors">
-                    <td class="py-2 px-4">{{item.date}}</td>
-                    <td class="py-2 px-4">{{item.category}}</td>
-                    <td class="py-2 px-4">{{item.amount}}</td>
-                    <td class="py-2 px-4">{{item.paymentMethod}}</td>
+                    <td class="md:py-2 md:px-4 py-1 px-2">{{item.date}}</td>
+                    <td class="md:py-2 md:px-4 py-1 px-2">{{item.category}}</td>
+                    <td class="md:py-2 md:px-4 py-1 px-2">{{item.amount}}</td>
+                    <td class="md:py-2 md:px-4 py-1 px-2">{{item.paymentMethod}}</td>
                   </tr>
                   }
                 </tbody>
               </table>
             </div>
             
-        </div>
-  </section>
+    </div>
+</section>
 </body>
