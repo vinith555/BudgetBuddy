@@ -1,0 +1,12 @@
+<div class="fixed inset-0 flex items-center justify-center bg-gray-400 bg-transparent z-50">
+    <div class="relative bg-white p-8">
+        <button class="absolute top-4 right-4" >X</button>
+        <form (ngSubmit)="onSubmit(form)" #form = "ngForm" class="flex flex-col gap-y-4 items-center">
+            <input type="date" name="date" placeholder="Select the date" class="border border-[#A9D4DB] border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2E8A99] px-4 py-2 w-full" ngModel>
+            <input type="text" name="category" placeholder="Enter the category" class="border border-[#A9D4DB] border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2E8A99] px-4 py-2 w-full" ngModel>
+            <input type="number" name="amount" placeholder="Enter the amount" class="border border-[#A9D4DB] border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2E8A99] px-4 py-2 w-full" ngModel>
+            <input type="text" name="paymentMethod" placeholder="Enter the payment method" class="border border-[#A9D4DB] border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2E8A99] px-4 py-2 w-full" ngModel>
+            <button class="bg-[#2E8A99] text-white rounded-md w-fit py-2 px-4 text-sm">SUBMIT</button>
+        </form>
+    </div>
+</div>

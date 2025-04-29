@@ -60,7 +60,8 @@
             <div class="flex justify-between items-center mb-4">
               <h2 class="md:text-2xl text-xl font-bold text-gray-800">What You Spent💸</h2>
               <div class="gap-x-6">
-                <button class="md:py-2 md:px-4 md:text-sm py-2 px-2 text-xs font-semibold border-2 border-[#2E8A99] text-[#2E8A99] rounded-md hover:bg-[#2E8A99] hover:text-white transition-colors duration-300">
+                <button class="md:py-2 md:px-4 md:text-sm py-2 px-2 text-xs font-semibold border-2 border-[#2E8A99] text-[#2E8A99] rounded-md hover:bg-[#2E8A99] hover:text-white transition-colors duration-300"
+                (click)="addExpence()">
                   Add New Expense
                 </button>
               </div>
@@ -91,7 +92,8 @@
     <div class="bg-white h-80 md:w-[580px] sm:w-[400px] w-[350px] rounded-xl shadow-lg p-4">
             <div class="flex justify-between items-center mb-4">
               <h2 class="md:text-2xl text-xl font-bold text-gray-800">What You Made💼</h2>
-              <button class="md:py-2 md:px-4 md:text-sm py-2 px-2 text-xs font-semibold border-2 border-[#2E8A99] text-[#2E8A99] rounded-md hover:bg-[#2E8A99] hover:text-white transition-colors duration-300">
+              <button class="md:py-2 md:px-4 md:text-sm py-2 px-2 text-xs font-semibold border-2 border-[#2E8A99] text-[#2E8A99] rounded-md hover:bg-[#2E8A99] hover:text-white transition-colors duration-300"
+              (click)="addIncome()">
                 Add Income Source
               </button>
             </div>
@@ -120,5 +122,6 @@
             </div>
             
     </div>
+    @if (displayForm) {<app-details-form (formData)="formData($event)"></app-details-form>}
 </section>
 </body>

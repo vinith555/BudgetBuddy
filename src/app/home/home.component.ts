@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { DetailsFormComponent } from '../details-form/details-form.component';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [CommonModule,DetailsFormComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -23,10 +24,23 @@ name = 'Vinith';
 ];
 dispPLay:boolean = true;
 dispCount:number = 1;
+displayForm:boolean = false;
+
+formData(data:{date:string,category:string,amount:number,paymentmethod:string}){
+  console.log(data);
+  this.displayForm = false;
+};
 ngOnInit(): void {
     setTimeout(()=>{
       this.dispPLay = false;
     },5000);
-    console.log("ngOnint");  
-  }
+}
+
+addExpence(){
+  this.displayForm = true;
+}
+
+addIncome(){
+  this.displayForm = true;
+}
 }
