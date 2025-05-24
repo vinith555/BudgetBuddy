@@ -23,11 +23,14 @@ name = 'Vinith';
   { date: "2025-03-28", category: "Savings", amount: 300.00, paymentMethod: "Bank Transfer" }
 ];
 dispPLay:boolean = true;
-dispCount:number = 1;
 displayForm:boolean = false;
-
+formNumber:number = 0;
 formData(data:{date:string,category:string,amount:number,paymentmethod:string}){
-  console.log(data);
+  if(this.formNumber == 1){
+    console.log(data);
+  }else if(this.formNumber == 2){
+    console.log(data);
+  }
   this.displayForm = false;
 };
 ngOnInit(): void {
@@ -38,9 +41,11 @@ ngOnInit(): void {
 
 addExpence(){
   this.displayForm = true;
+  this.formNumber = 1;
 }
 
 addIncome(){
   this.displayForm = true;
+  this.formNumber = 2;
 }
 }

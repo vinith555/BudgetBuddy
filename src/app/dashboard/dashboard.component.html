@@ -1,5 +1,5 @@
-<nav class="flex flex-row bg-white sticky top-0 w-full z-50 shadow-md rounded-lg items-center px-8 py-4 justify-center">
-    <h1>@if (displayToggle) {<button>Tog</button>}</h1>
+<nav class="flex flex-row bg-white sticky top-0 w-full z-50 shadow-md rounded-lg justify-around items-center px-8 py-4">
+    <h1>@if (displayToggle) {<button (click)="displaySidebar=!displaySidebar" class="sm:text-2xl text-xl text-[#2E8A99] font-bold">&#9776;</button>}</h1>
     <div class="flex flex-row items-center gap-x-4">
     <h1 class="sm:text-4xl text-2xl font-extrabold text-[#2E8A99] bg-clip-text drop-shadow-lg tracking-wide">
     Budget<span class="text-[#1E3A47]">Buddy</span>
@@ -10,10 +10,21 @@
         <a routerLink="/dashboard" class="text-[#2E8A99] font-bold text-lg px-4 py-2 rounded-lg border-2 border-[#2E8A99] hover:bg-[#2E8A99] hover:text-white transition-all duration-300 shadow-md">
         DASHBOARD</a>
         <a href="" class="text-[#2E8A99] font-bold text-lg px-4 py-2 rounded-lg border-2 border-[#2E8A99] hover:bg-[#2E8A99] hover:text-white transition-all duration-300 shadow-md">
-        Visual Board</a>
+        VISUAL BOARD</a>
         <a href="" class="text-[#2E8A99] font-bold text-lg px-4 py-2 rounded-lg border-2 border-[#2E8A99] hover:bg-[#2E8A99] hover:text-white transition-all duration-300 shadow-md">
-        About</a>
+        ABOUT</a>
     </div>}
    
 </nav>
+@if(displaySidebar){
+<section>
+    <div class="flex flex-col items-center gap-y-4 fixed bg-white h-screen px-8 z-50"> 
+        <a routerLink="/dashboard" class="text-[#2E8A99] w-full font-bold text-md px-4 py-2 rounded-lg hover:bg-[#2E8A99] hover:text-white transition-all duration-300">
+        DASHBOARD</a>
+        <a href="" class="text-[#2E8A99] w-full font-bold text-md px-4 py-2 rounded-lg hover:bg-[#2E8A99] hover:text-white transition-all duration-300">
+        VISUAL BOARD</a>
+        <a href="" class="text-[#2E8A99] w-full font-bold text-md px-4 py-2 rounded-lg hover:bg-[#2E8A99] hover:text-white transition-all duration-300">
+        ABOUT</a>
+    </div>
+</section>}
 <router-outlet></router-outlet>

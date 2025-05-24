@@ -9,14 +9,15 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class DashboardComponent{
  displayToggle:boolean = false;
+ displaySidebar:boolean = false;
  @HostListener('window:resize',['$event'])onResize(event:any){
   const width = event.target.innerWidth;
-  if(width < 820){
+  if(width < 860){
     this.displayToggle = true;
   }else{
     this.displayToggle = false;
+    this.displaySidebar = false;
   } 
-    console.log(event.target.innerWidth);
-    
+    // console.log(event.target.innerWidth); 
  };
 }
