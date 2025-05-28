@@ -1,0 +1,37 @@
+<main class="bg-[#A9D4DB] min-h-screen py-8 px-4">
+    <div class="flex flex-wrap gap-y-20 gap-x-20 justify-center lg:px-[120px]">
+      <div class="bg-white h-auto md:h-80 md:w-[580px] sm:w-[400px] w-[350px] rounded-xl shadow-lg p-4">
+        <canvas 
+          baseChart
+          [data]="incomeExpenseChartData"
+          [type]="incomeExpenseChartType"
+          >
+        </canvas>
+      </div>
+      <div class="bg-white h-auto md:h-80 md:w-[580px] sm:w-[400px] w-[350px] rounded-xl shadow-lg p-4">
+        <canvas 
+          baseChart
+          [data]="monthlyExpenseChartData"
+          [type]="monthlyExpenseChartType"
+          [options]="monthlyExpenseChartOptions">
+        </canvas>
+      </div>
+      <div class="bg-white h-auto md:h-80 md:w-[580px] sm:w-[400px] w-[350px] rounded-xl shadow-lg p-4">
+        <canvas 
+          baseChart
+          [data]="spendingByCategoryChartData"
+          [type]="spendingByCategoryChartType"
+          [options]="spendingByCategoryOptions">
+        </canvas>
+      </div>
+      <div class="bg-white h-auto md:h-80 md:w-[580px] sm:w-[400px] w-[350px] rounded-xl shadow-lg p-4">
+        <canvas 
+          baseChart
+          [data]="monthlySavingChartData"
+          [type]="monthlySavingChartType"
+          [options]="monthlySavingChartOptions">
+        </canvas>
+      </div>
+    </div>
+  </main>
+  
