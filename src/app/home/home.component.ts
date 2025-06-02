@@ -25,6 +25,7 @@ name = 'Vinith';
 dispPLay:boolean = true;
 displayForm:boolean = false;
 formNumber:number = 0;
+displayDeleteOption:boolean = true;
 formData(data:{date:string,category:string,amount:number,paymentmethod:string}){
   if(this.formNumber == 1){
     console.log(data);

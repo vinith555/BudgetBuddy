@@ -1,13 +1,21 @@
 import { Component } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartType } from 'chart.js';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-visualboard',
-  imports: [BaseChartDirective],
+  imports: [BaseChartDirective,FormsModule,CommonModule],
   templateUrl: './visualboard.component.html',
   styleUrl: './visualboard.component.css'
 })
 export class VisualboardComponent {
+  selectedYear:number = 2000; 
+  availableYears:number[] = [2021, 2022, 2023, 2024, 2025];
+
+  onYearChange() {
+  console.log('Selected year:', this.selectedYear);
+ }
 
   incomeExpenseChartData:ChartConfiguration['data'] = {
     datasets:[
@@ -17,7 +25,10 @@ export class VisualboardComponent {
     ],
     labels:['Income','Expenses']
   };
-  incomeExpenseChartType:ChartType = 'pie';
+  incomeExpenseChartOption: ChartConfiguration['options']={
+    responsive:true,
+  }
+  incomeExpenseChartType:ChartType = 'doughnut';
   
   monthlyExpenseChartData: ChartConfiguration['data'] = {
     datasets: [
