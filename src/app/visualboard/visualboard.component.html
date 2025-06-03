@@ -1,13 +1,25 @@
 <main class="bg-[#A9D4DB] min-h-screen py-8 px-4">
     <div class="flex flex-wrap gap-y-20 gap-x-20 justify-center lg:px-[120px]">
-    <div class="bg-white h-auto md:h-80 md:w-[580px] sm:w-[400px] w-[350px] rounded-xl shadow-lg p-4">
+    <div class="flex flex-wrap gap-x-12 justify-center bg-white h-auto md:h-80 md:w-[580px] sm:w-[400px] w-[350px] rounded-xl shadow-lg p-4">
+      <div class="mt-2">
+          <label for="yearSelect" class="font-bold md:text-2xl text-xl text-[#1E3A47]">Select Year</label>
+          <select id="yearSelect" 
+          (change)="onYearChange()"
+          [(ngModel)] = "selectedYear"
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+          >
+          <option *ngFor="let year of availableYears" [value]="year">{{year}}</option>
+          </select>
+          </div>
+      <div class="flex flex-col items-center">
       <h1 class="font-bold md:text-2xl text-xl text-[#1E3A47]">Income vs Expenses</h1>
         <div class="h-64 w-64"><canvas 
           baseChart
           [data]="incomeExpenseChartData"
           [type]="incomeExpenseChartType"
           >
-        </canvas></div>
+        </canvas></div> </div>
+          
     </div>
       <div class="bg-white h-auto md:h-80 md:w-[580px] sm:w-[400px] w-[350px] rounded-xl shadow-lg p-4">
         <h1 class="font-bold md:text-2xl text-xl text-[#1E3A47]">Monthly Expense Trend</h1>
@@ -39,15 +51,6 @@
     </div>
 
 
-    <div class="mt-2">
-          <label for="yearSelect" class="block text-sm font-medium text-gray-700">Select Year</label>
-          <select id="yearSelect" 
-          (change)="onYearChange()"
-          [(ngModel)] = "selectedYear"
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
-          >
-          <option *ngFor="let year of availableYears" [value]="year">{{year}}</option>
-          </select>
-    </div>
+
   </main>
   

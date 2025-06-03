@@ -1,14 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { DetailsFormComponent } from '../details-form/details-form.component';
+import { DetailsService } from '../details.service';
 
 @Component({
   selector: 'app-home',
   imports: [CommonModule,DetailsFormComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
+  providers:[DetailsService]
 })
 export class HomeComponent implements OnInit{
+
+  private detail = inject(DetailsService);
 name = 'Vinith';
  budgetData = [
   { date: "2025-03-01", category: "Groceries", amount: 120.50, paymentMethod: "Credit Card" },

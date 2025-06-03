@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './visualboard.component.css'
 })
 export class VisualboardComponent {
-  selectedYear:number = 2000; 
+  selectedYear:number = 2021; 
   availableYears:number[] = [2021, 2022, 2023, 2024, 2025];
 
   onYearChange() {
