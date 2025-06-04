@@ -1,19 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { DetailsFormComponent } from '../details-form/details-form.component';
 import { DetailsService } from '../details.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule,DetailsFormComponent],
+  imports: [CommonModule,FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   providers:[DetailsService]
 })
 export class HomeComponent implements OnInit{
 
-  private detail = inject(DetailsService);
-name = 'Vinith';
+ private detail = inject(DetailsService);
+ name = 'Vinith';
  budgetData = [
   { date: "2025-03-01", category: "Groceries", amount: 120.50, paymentMethod: "Credit Card" },
   { date: "2025-03-03", category: "Rent", amount: 1200.00, paymentMethod: "Bank Transfer" },
@@ -30,14 +30,25 @@ dispPLay:boolean = true;
 displayForm:boolean = false;
 formNumber:number = 0;
 displayDeleteOption:boolean = true;
-formData(data:{date:string,category:string,amount:number,paymentmethod:string}){
-  if(this.formNumber == 1){
-    console.log(data);
-  }else if(this.formNumber == 2){
-    console.log(data);
-  }
+dataToBeAdded:{type: "income" | "expense",category: string,amount: number,payment_method: string,created_at: string} = 
+{type: "income", 
+  category: '',
+  amount: 0,
+  payment_method: '',
+  created_at: ''};
+
+formData(data:{date:string,category:string,amount:number,payment_method:string}){
+  this.dataToBeAdded.category = data.category;
+  this.dataToBeAdded.amount = data.amount;
+  this.dataToBeAdded.payment_method = data.payment_method;
+  this.dataToBeAdded.created_at = data.date;
+  if(this.formNumber == 1)this.dataToBeAdded.type = "expense";
+  else this.dataToBeAdded.type = "income";
+  this.detail.addData(this.dataToBeAdded,'1').subscribe();
+  
   this.displayForm = false;
 };
+
 ngOnInit(): void {
     setTimeout(()=>{
       this.dispPLay = false;

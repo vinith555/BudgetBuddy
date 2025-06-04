@@ -3,8 +3,6 @@ const app = express();
 const mysql = require('mysql2');
 const cors = require('cors');
 
-
-
 const con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -18,6 +16,7 @@ con.connect((err)=>{
 })
 
 app.use(cors());
+app.use(express.json());
 
 app.get('/user/summery/:id',(req,res) => {
     const userId = req.params.id;
@@ -83,6 +82,31 @@ app.get('/user/total_income/:id',(req,res) => {
         res.send(result);
     } );
 });
+
+app.post('/user/add_data/:id', (req, res) => {
+  const userId = req.params.id;
+  const { type, category, amount, payment_method, created_at } = req.body;
+//   if (!type || !category || !amount || !payment_method || !created_at) {
+//   return res.status(400).send("Missing required fields");
+//  }
+
+  const sql = `
+    INSERT INTO transactions (user_id, type, category, amount, payment_method, created_at)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `;
+  con.query(
+    sql,
+    [userId, type, category, amount, payment_method, created_at],
+    (err, result) => {
+      if (err) {
+        console.error("Database error:", err);
+        return res.status(500).send("Database error");
+      }
+      res.status(200).send("Data Added Successfully"); 
+    }
+  );
+});
+
 
 app.listen(5000,()=>{ console.log("Listening in port number 5000");
  });

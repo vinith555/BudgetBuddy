@@ -123,8 +123,18 @@
               </table>
             </div>
     </div>
-    @if (displayForm) {<div><app-details-form (formData)="formData($event)">
-      <button class="font-bold text-4xl text-red-600 absolute top-4 right-4" (click)="displayForm = false">&times;</button>
-    </app-details-form></div>}
+    @if (displayForm) {<div class="fixed inset-0 flex items-center justify-center bg-gray-400 bg-transparent z-50">
+    <div class="relative bg-white p-12">
+        <button class="font-bold text-4xl text-red-600 absolute top-4 right-4" (click)="displayForm = false">&times;</button>
+        <form (ngSubmit)="formData(form.value)" #form = "ngForm" class="flex flex-col gap-y-4 items-center">
+            <input type="date" name="date" placeholder="Select the date" class="border border-[#A9D4DB] border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2E8A99] px-4 py-2 w-full" ngModel>
+            <input type="text" name="category" placeholder="Enter the category" class="border border-[#A9D4DB] border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2E8A99] px-4 py-2 w-full" ngModel>
+            <input type="number" name="amount" placeholder="Enter the amount" class="border border-[#A9D4DB] border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2E8A99] px-4 py-2 w-full" ngModel>
+            <input type="text" name="payment_method" placeholder="Enter the payment method" class="border border-[#A9D4DB] border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2E8A99] px-4 py-2 w-full" ngModel>
+            <button class="bg-[#2E8A99] text-white rounded-md w-fit py-2 px-4 text-sm">SUBMIT</button>
+              </form>
+          </div>
+      </div>
+    }
 </section>
 </body>
