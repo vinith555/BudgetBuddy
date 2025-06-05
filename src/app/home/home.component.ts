@@ -53,6 +53,9 @@ ngOnInit(): void {
     setTimeout(()=>{
       this.dispPLay = false;
     },5000);
+    this.detail.getIncomeOrExpenseDetail("income","1").subscribe((data)=>{
+      console.log(data);
+    });
 }
 
 addExpence(){

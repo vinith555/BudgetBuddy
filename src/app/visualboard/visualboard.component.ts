@@ -1,21 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { DetailsService } from '../details.service';
 @Component({
   selector: 'app-visualboard',
   imports: [BaseChartDirective,FormsModule,CommonModule],
   templateUrl: './visualboard.component.html',
-  styleUrl: './visualboard.component.css'
+  styleUrl: './visualboard.component.css',
+  providers:[DetailsService]
 })
-export class VisualboardComponent {
+export class VisualboardComponent implements OnInit{
+  
+  private detail = inject(DetailsService);
+
   selectedYear:number = 2021; 
   availableYears:number[] = [2021, 2022, 2023, 2024, 2025];
 
+  monthlySavingData:number[] = [];
+  monthlyExpenseData:number[] = [];
+
+  ngOnInit(): void {
+    this.detail.getIncomeOrExpenseAmount("income","2025","1").subscribe((data)=>{ 
+      console.log(this.monthlySavingData);
+    });
+  }
+
   onYearChange() {
   console.log('Selected year:', this.selectedYear);
- }
+  }
 
   incomeExpenseChartData:ChartConfiguration['data'] = {
     datasets:[
@@ -65,7 +79,7 @@ export class VisualboardComponent {
   monthlySavingChartData: ChartConfiguration['data'] = {
     datasets: [
       {
-        data: [ 40,50,60,70,80,90,90,80,70,60,50,40 ],
+        data: this.monthlySavingData,
         label: 'Monthly Saving',
         backgroundColor:'#1E3A47',
         borderColor:'#2E8A99',

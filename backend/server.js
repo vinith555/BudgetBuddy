@@ -31,8 +31,9 @@ app.get('/user/summery/:id',(req,res) => {
 
 });
 
-app.get('/user/income/:id', (req, res) => {
+app.get('/user/:type/:id', (req, res) => {
   const userId = req.params.id;
+  const type = req.params.type;
 
   const sql = `
     SELECT ts.category, ts.amount, ts.payment_method, ts.created_at
@@ -41,26 +42,7 @@ app.get('/user/income/:id', (req, res) => {
     WHERE users.user_id = ? AND ts.type = ?
   `;
 
-  con.query(sql, [userId,"income"], (err, result) => {
-    if (err) {
-      console.error('Database error:', err);
-      return res.status(500).send('Internal Server Error');
-    }
-    res.send(result);
-  });
-});
-
-app.get('/user/expense/:id', (req, res) => {
-  const userId = req.params.id;
-
-  const sql = `
-    SELECT ts.category, ts.amount, ts.payment_method, ts.created_at
-    FROM transactions AS ts
-    INNER JOIN users ON users.user_id = ts.user_id
-    WHERE users.user_id = ? AND ts.type = ?
-  `;
-
-  con.query(sql, [userId,"expense"], (err, result) => {
+  con.query(sql, [userId,type], (err, result) => {
     if (err) {
       console.error('Database error:', err);
       return res.status(500).send('Internal Server Error');
@@ -86,9 +68,6 @@ app.get('/user/total_income/:id',(req,res) => {
 app.post('/user/add_data/:id', (req, res) => {
   const userId = req.params.id;
   const { type, category, amount, payment_method, created_at } = req.body;
-//   if (!type || !category || !amount || !payment_method || !created_at) {
-//   return res.status(400).send("Missing required fields");
-//  }
 
   const sql = `
     INSERT INTO transactions (user_id, type, category, amount, payment_method, created_at)
@@ -106,6 +85,32 @@ app.post('/user/add_data/:id', (req, res) => {
     }
   );
 });
+
+app.get('/user/:type/:year/:id', (req, res) => {
+  const userId = req.params.id;
+  const year = req.params.year;
+  const type = req.params.type;
+
+  const sql = `
+    SELECT MONTH(created_at) AS month, SUM(amount) AS total_income FROM transactions WHERE type = ?
+    AND YEAR(created_at) = ? AND user_id = ? GROUP BY MONTH(created_at) ORDER BY MONTH(created_at)`;
+
+  con.query(sql, [type, year, userId], (err, results) => {
+    if (err) {
+      return res.status(500).send("Database Error");
+    }
+
+    const amount = Array(12).fill(0);
+
+    results.forEach(row => {
+      const monthIndex = row.month - 1; 
+      amount[monthIndex] = parseFloat(row.total_income);
+    });
+
+    res.send(amount); 
+  });
+});
+
 
 
 app.listen(5000,()=>{ console.log("Listening in port number 5000");
