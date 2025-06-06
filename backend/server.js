@@ -36,11 +36,10 @@ app.get('/user/:type/:id', (req, res) => {
   const type = req.params.type;
 
   const sql = `
-    SELECT ts.category, ts.amount, ts.payment_method, ts.created_at
+    SELECT ts.category, ts.amount, ts.payment_method, DATE_FORMAT(ts.created_at, '%Y-%m-%d') AS created_date
     FROM transactions AS ts
     INNER JOIN users ON users.user_id = ts.user_id
-    WHERE users.user_id = ? AND ts.type = ?
-  `;
+    WHERE users.user_id = ? AND ts.type = ?`;
 
   con.query(sql, [userId,type], (err, result) => {
     if (err) {
@@ -106,7 +105,6 @@ app.get('/user/:type/:year/:id', (req, res) => {
       const monthIndex = row.month - 1; 
       amount[monthIndex] = parseFloat(row.total_income);
     });
-
     res.send(amount); 
   });
 });
