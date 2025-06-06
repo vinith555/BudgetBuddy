@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { FormsModule } from '@angular/forms';
@@ -18,77 +18,63 @@ export class VisualboardComponent implements OnInit{
   selectedYear:number = 2021; 
   availableYears:number[] = [2021, 2022, 2023, 2024, 2025];
 
-  monthlySavingData:number[] = [];
-  monthlyExpenseData:number[] = [];
-
   ngOnInit(): void {
-    this.detail.getIncomeOrExpenseAmount("income","2025","1").subscribe((data)=>{ 
-      console.log(this.monthlySavingData);
+    // income
+    this.detail.getIncomeOrExpenseAmount("income",this.selectedYear,"1").subscribe((data)=>{ 
+    this.monthlySavingChartData = {
+    datasets: [{ data: data,label: 'Monthly Saving',backgroundColor:'#1E3A47',borderColor:'#2E8A99' }],
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'] };
+    });
+    // expense
+    this.detail.getIncomeOrExpenseAmount("expense",this.selectedYear,"1").subscribe((data)=>{
+    this.monthlyExpenseChartData= {
+    datasets: [{data: data,label: 'Monthly Expense',backgroundColor:'#1E3A47',borderColor:'#2E8A99',}],
+    labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December']};
     });
   }
 
   onYearChange() {
   console.log('Selected year:', this.selectedYear);
+  this.detail.getIncomeOrExpenseAmount("income",this.selectedYear,"1").subscribe((data)=>{ 
+    this.monthlySavingChartData = {
+    datasets: [{ data: data,label: 'Monthly Saving',backgroundColor:'#1E3A47',borderColor:'#2E8A99' }],
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'] };
+    });
+
+    this.detail.getIncomeOrExpenseAmount("expense",this.selectedYear,"1").subscribe((data)=>{
+    this.monthlyExpenseChartData= {
+    datasets: [{data: data,label: 'Monthly Expense',backgroundColor:'#1E3A47',borderColor:'#2E8A99',}],
+    labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December']};
+    });
   }
 
   incomeExpenseChartData:ChartConfiguration['data'] = {
-    datasets:[
-      {data:[12000,15000],
-       label:'Income VS Expenses' 
-      }
-    ],
+    datasets:[{data:[12000,15000],label:'Income VS Expenses'}],
     labels:['Income','Expenses']
   };
-  incomeExpenseChartOption: ChartConfiguration['options']={
-    responsive:true,
-  }
+  incomeExpenseChartOption: ChartConfiguration['options']={ responsive:true, }
   incomeExpenseChartType:ChartType = 'doughnut';
   
+
   monthlyExpenseChartData: ChartConfiguration['data'] = {
-    datasets: [
-      {
-        data: [ 65, 59, 80, 81, 56, 55, 40,50,60,70,80,90 ],
-        label: 'Monthly Expense',
-        backgroundColor:'#1E3A47',
-        borderColor:'#2E8A99',
-      }
-    ],
+    datasets: [{data: [],label: 'Monthly Expense',backgroundColor:'#1E3A47',borderColor:'#2E8A99',}],
     labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December']
   };
-  monthlyExpenseChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-  };
+  monthlyExpenseChartOptions: ChartConfiguration['options'] = { responsive: true, };
   monthlyExpenseChartType: ChartType = 'line';
 
+
   spendingByCategoryChartData: ChartConfiguration['data'] = {
-    datasets: [
-      {
-        data: [ 65, 59, 80, 81, 56, 55, 40 ],
-        label: 'Spending By Category',
-        backgroundColor:'#2E8A99',
-        borderColor:'#2E8A99',
-      }
-    ],
+    datasets: [{data: [ 65, 59, 80, 81, 56, 55, 40 ],label: 'Spending By Category',backgroundColor:'#2E8A99',borderColor:'#2E8A99',}],
     labels: [ 'Groceries','Rent','Internet','Shopping','Medical','Entertainment','Savings' ]
   };
-  spendingByCategoryOptions: ChartConfiguration['options'] = {
-    responsive: true,
-  };
+  spendingByCategoryOptions: ChartConfiguration['options'] = { responsive: true, };
   spendingByCategoryChartType: ChartType = 'bar';
 
   monthlySavingChartData: ChartConfiguration['data'] = {
-    datasets: [
-      {
-        data: this.monthlySavingData,
-        label: 'Monthly Saving',
-        backgroundColor:'#1E3A47',
-        borderColor:'#2E8A99',
-      }
-    ],
+    datasets: [{ data: [],label: 'Monthly Saving',backgroundColor:'#1E3A47',borderColor:'#2E8A99' }],
     labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December']
   };
-  monthlySavingChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-  };
+  monthlySavingChartOptions: ChartConfiguration['options'] = { responsive: true, };
   monthlySavingChartType: ChartType = 'line';
 }

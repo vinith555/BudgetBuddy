@@ -14,12 +14,12 @@ export class DetailsService {
    return this.http.get(this.url);
   }
 
-  getIncomeOrExpenseDetail(type:string,userId:string){
-    return this.http.get(`${this.url}/${type}/${userId}`);
+  getIncomeOrExpenseDetail(type:string,userId:string):Observable<{category:string,amount:number,payment_method:string,created_date:string}[]>{
+    return this.http.get<{category:string,amount:number,payment_method:string,created_date:string}[]>(`${this.url}/${type}/${userId}`);
   }
 
-  getIncomeOrExpenseAmount(type:string,year:string,userId:string):Observable<{ data: number[] }>{
-    return this.http.get<{ data: number[] }>(`${this.url}/${type}/${year}/${userId}`);
+  getIncomeOrExpenseAmount(type:string,year:number,userId:string):Observable<number[]>{
+    return this.http.get<number[]>(`${this.url}/${type}/${year}/${userId}`);
   }
 
   addData(data:{type: "income" | "expense",category: string,amount: number,payment_method: string,created_at: string},userId:string){

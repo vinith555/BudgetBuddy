@@ -46,10 +46,10 @@
           <tbody>
             @for (item of budgetData; track $index) {
             <tr class="odd:bg-gray-100 even:bg-white hover:bg-gray-200 transition-colors">
-              <td class="md:py-2 md:px-4 py-1 px-2">{{item.date}}</td>
+              <td class="md:py-2 md:px-4 py-1 px-2">{{item.created_date}}</td>
               <td class="md:py-2 md:px-4 py-1 px-2">{{item.category}}</td>
               <td class="md:py-2 md:px-4 py-1 px-2">{{item.amount}}</td>
-              <td class="md:py-2 md:px-4 py-1 px-2">{{item.paymentMethod}}</td>
+              <td class="md:py-2 md:px-4 py-1 px-2">{{item.payment_method}}</td>
             </tr>
             }
           </tbody>
@@ -79,10 +79,10 @@
                 <tbody>
                   @for (item of budgetData; track $index) {
                   <tr class="odd:bg-gray-100 even:bg-white hover:bg-gray-200 transition-colors">
-                    <td class="md:py-2 md:px-4 py-1 px-2">{{item.date}}</td>
+                    <td class="md:py-2 md:px-4 py-1 px-2">{{item.created_date}}</td>
                     <td class="md:py-2 md:px-4 py-1 px-2">{{item.category}}</td>
                     <td class="md:py-2 md:px-4 py-1 px-2">{{item.amount}}</td>
-                    <td class="md:py-2 md:px-4 py-1 px-2">{{item.paymentMethod}}</td>
+                    <td class="md:py-2 md:px-4 py-1 px-2">{{item.payment_method}}</td>
                   </tr>
                   }
                 </tbody>
@@ -112,10 +112,10 @@
                 <tbody>
                   @for (item of budgetData; track $index) {
                   <tr class="odd:bg-gray-100 even:bg-white hover:bg-gray-200 transition-colors">
-                    <td class="md:py-2 md:px-4 py-1 px-2 ">{{item.date}}</td>
+                    <td class="md:py-2 md:px-4 py-1 px-2 ">{{item.created_date}}</td>
                     <td class="md:py-2 md:px-4 py-1 px-2 ">{{item.category}}</td>
                     <td class="md:py-2 md:px-4 py-1 px-2 ">{{item.amount}}</td>
-                    <td class="md:py-2 md:px-4 py-1 px-2 ">{{item.paymentMethod}}</td>
+                    <td class="md:py-2 md:px-4 py-1 px-2 ">{{item.payment_method}}</td>
                     <!-- @if (displayDeleteOption) { <button><i class="fas fa-trash text-red-600 hover:text-red-700"></i></button> } -->
                   </tr>
                   }
