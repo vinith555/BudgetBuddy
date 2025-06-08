@@ -50,17 +50,19 @@ app.get('/user/:type/:id', (req, res) => {
   });
 });
 
-app.get('/user/total_income/:id',(req,res) => {
+app.get('/user/total/:type/:year/:id',(req,res) => {
     const userId = req.params.id;
-    const sql = `SELECT SUM(transactions.amount) FROM transactions INNER JOIN users 
-    ON transactions.user_id = users.user_id WHERE users.user_id = ? AND transactions.type = ?`;
+    const type = req.params.type;
+    const year = req.params.year;
+    const sql = `SELECT SUM(transactions.amount) as Total FROM transactions INNER JOIN users 
+    ON transactions.user_id = users.user_id WHERE users.user_id = ? AND transactions.type = ? AND YEAR(transactions.created_at) = ?`;
 
-    con.query(sql,[userId, 'income'],(err,result) =>{
+    con.query(sql,[userId, type, year],(err,result) =>{
         if(err) {
             console.error(err);
             return res.status(500).send('Internal Server Error');
         }
-        res.send(result);
+        res.send(result[0].Total);
     } );
 });
 

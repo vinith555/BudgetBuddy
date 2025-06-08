@@ -12,8 +12,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class HomeComponent implements OnInit{
 
- private detail = inject(DetailsService);
- name = 'Vinith';
+private detail = inject(DetailsService);
+name = 'Vinith';
 budgetData:{category:string,amount:number,payment_method:string,created_date:string}[] = [];
 dispPLay:boolean = true;
 displayForm:boolean = false;
@@ -25,6 +25,10 @@ dataToBeAdded:{type: "income" | "expense",category: string,amount: number,paymen
   amount: 0,
   payment_method: '',
   created_at: ''};
+
+// total income and expense
+totalIncome:number = 0;
+totalExpense:number = 0;
 
 formData(data:{date:string,category:string,amount:number,payment_method:string}){
   this.dataToBeAdded.category = data.category;
@@ -45,6 +49,10 @@ ngOnInit(): void {
       console.log(data);
       this.budgetData = data;
     });
+
+    // total Income and expense
+    this.detail.getTotalIncomeOrExpenseAmount("Income","1",2025).subscribe((data)=>{this.totalIncome = data;});
+    this.detail.getTotalIncomeOrExpenseAmount("Expense","1",2025).subscribe((data)=>{this.totalExpense = data;});
 }
 
 addExpence(){
