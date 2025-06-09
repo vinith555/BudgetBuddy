@@ -23,8 +23,22 @@ export class VisualboardComponent implements OnInit{
   totalExpense:number = 0;
 
   ngOnInit(): void {
-    this.detail.getTotalIncomeOrExpenseAmount("Income","1",this.selectedYear).subscribe((data)=>{this.totalIncome = data;});
-    this.detail.getTotalIncomeOrExpenseAmount("Expense","1",this.selectedYear).subscribe((data)=>{this.totalExpense = data;});
+    forkJoin({
+    income: this.detail.getTotalIncomeOrExpenseAmount("Income", "1", this.selectedYear),
+    expense: this.detail.getTotalIncomeOrExpenseAmount("Expense", "1", this.selectedYear)
+  }).subscribe(({ income, expense }) => {
+    this.totalIncome = income;
+    this.totalExpense = expense;
+
+    this.incomeExpenseChartData = {
+      datasets: [{
+        data: [this.totalIncome, this.totalExpense],
+        label: 'Income VS Expenses'
+      }],
+      labels: ['Income', 'Expenses']
+    };
+  });
+
     // income
     this.detail.getIncomeOrExpenseAmount("income",this.selectedYear,"1").subscribe((data)=>{ 
     this.monthlySavingChartData = {
@@ -38,24 +52,26 @@ export class VisualboardComponent implements OnInit{
     labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December']};
     });
     
-    this.incomeExpenseChartData = {
-      datasets:[{data:[this.totalIncome,this.totalExpense],label:'Income VS Expenses'}],
-      labels:['Income','Expenses']
-    }
-
   }
 
   onYearChange() {
   console.log('Selected year:', this.selectedYear);
 
   forkJoin({
-    income:this.detail.getTotalIncomeOrExpenseAmount("Income","1",this.selectedYear),
-    expense:this.detail.getTotalIncomeOrExpenseAmount("Expense","1",this.selectedYear)
+    income: this.detail.getTotalIncomeOrExpenseAmount("Income", "1", this.selectedYear),
+    expense: this.detail.getTotalIncomeOrExpenseAmount("Expense", "1", this.selectedYear)
   }).subscribe(({ income, expense }) => {
     this.totalIncome = income;
-    this.totalExpense = expense;})
-  
-  console.log(this.totalExpense + " "+this.totalIncome);
+    this.totalExpense = expense;
+
+    this.incomeExpenseChartData = {
+      datasets: [{
+        data: [this.totalIncome, this.totalExpense],
+        label: 'Income VS Expenses'
+      }],
+      labels: ['Income', 'Expenses']
+    };
+  });
   
   this.detail.getIncomeOrExpenseAmount("income",this.selectedYear,"1").subscribe((data)=>{ 
     this.monthlySavingChartData = {
@@ -68,11 +84,6 @@ export class VisualboardComponent implements OnInit{
     datasets: [{data: data,label: 'Monthly Expense',backgroundColor:'#1E3A47',borderColor:'#2E8A99',}],
     labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December']};
     });
-
-    this.incomeExpenseChartData = {
-      datasets:[{data:[this.totalIncome,this.totalExpense],label:'Income VS Expenses'}],
-      labels:['Income','Expenses']
-    }
   }
 
   incomeExpenseChartData:ChartConfiguration['data'] = {

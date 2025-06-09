@@ -31,6 +31,16 @@ app.get('/user/summery/:id',(req,res) => {
 
 });
 
+app.get('/user/highestTransaction/:id',(req,res)=>{
+  const userId = req.params.id;
+  const sql = `SELECT MAX(ts.amount) as maxAmount FROM transactions AS ts
+    INNER JOIN users ON users.user_id = ts.user_id
+    WHERE users.user_id = ?`;
+    con.query(sql,[userId],(err,result)=>{
+      res.send(result[0].maxAmount);
+    });
+});
+
 app.get('/user/:type/:id', (req, res) => {
   const userId = req.params.id;
   const type = req.params.type;

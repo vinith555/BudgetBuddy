@@ -29,6 +29,7 @@ dataToBeAdded:{type: "income" | "expense",category: string,amount: number,paymen
 // total income and expense
 totalIncome:number = 0;
 totalExpense:number = 0;
+highestExpense:number = 0;
 
 formData(data:{date:string,category:string,amount:number,payment_method:string}){
   this.dataToBeAdded.category = data.category;
@@ -53,6 +54,7 @@ ngOnInit(): void {
     // total Income and expense
     this.detail.getTotalIncomeOrExpenseAmount("Income","1",2025).subscribe((data)=>{this.totalIncome = data;});
     this.detail.getTotalIncomeOrExpenseAmount("Expense","1",2025).subscribe((data)=>{this.totalExpense = data;});
+    this.detail.getHighestExpense(1).subscribe((data)=>{this.highestExpense = data});
 }
 
 addExpence(){

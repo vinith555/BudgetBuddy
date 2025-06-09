@@ -14,6 +14,10 @@ export class DetailsService {
    return this.http.get(this.url);
   }
 
+  getHighestExpense(id:number):Observable<number>{
+    return this.http.get<number>(`${this.url}/highestTransaction/${id}`);
+  }
+
   getTotalIncomeOrExpenseAmount(type:string,userId:string,year:number):Observable<number>{
     return this.http.get<number>(`${this.url}/total/${type}/${year}/${userId}`);
   }
