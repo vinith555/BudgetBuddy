@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
 export class DetailsService {
 
   private http = inject(HttpClient);
-  private url = `http://localhost:5000/user`;
+  private url = `http://localhost:5000/api/user`;
 
-  getSummery(){
-   return this.http.get(this.url);
+  getSummery(userId:number):Observable<{category:string,amount:number,payment_method:string,created_date:string}[]>{
+   return this.http.get<{category:string,amount:number,payment_method:string,created_date:string}[]>(`${this.url}/summery/${userId}`);
   }
 
   getHighestExpense(id:number):Observable<number>{

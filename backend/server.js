@@ -18,9 +18,9 @@ con.connect((err)=>{
 app.use(cors());
 app.use(express.json());
 
-app.get('/user/summery/:id',(req,res) => {
+app.get('/api/user/summery/:id',(req,res) => {
     const userId = req.params.id;
-    const sql = `SELECT ts.category, ts.amount, ts.payment_method, ts.created_at
+    const sql = `SELECT ts.category, ts.amount, ts.payment_method, DATE_FORMAT(ts.created_at, '%Y-%m-%d') AS created_date
     FROM transactions AS ts
     INNER JOIN users ON users.user_id = ts.user_id
     WHERE users.user_id = ?`;
@@ -31,7 +31,7 @@ app.get('/user/summery/:id',(req,res) => {
 
 });
 
-app.get('/user/highestTransaction/:id',(req,res)=>{
+app.get('/api/user/highestTransaction/:id',(req,res)=>{
   const userId = req.params.id;
   const sql = `SELECT MAX(ts.amount) as maxAmount FROM transactions AS ts
     INNER JOIN users ON users.user_id = ts.user_id
@@ -41,7 +41,7 @@ app.get('/user/highestTransaction/:id',(req,res)=>{
     });
 });
 
-app.get('/user/:type/:id', (req, res) => {
+app.get('/api/user/:type/:id', (req, res) => {
   const userId = req.params.id;
   const type = req.params.type;
 
@@ -60,7 +60,7 @@ app.get('/user/:type/:id', (req, res) => {
   });
 });
 
-app.get('/user/total/:type/:year/:id',(req,res) => {
+app.get('/api/user/total/:type/:year/:id',(req,res) => {
     const userId = req.params.id;
     const type = req.params.type;
     const year = req.params.year;
@@ -76,7 +76,7 @@ app.get('/user/total/:type/:year/:id',(req,res) => {
     } );
 });
 
-app.post('/user/add_data/:id', (req, res) => {
+app.post('/api/user/add_data/:id', (req, res) => {
   const userId = req.params.id;
   const { type, category, amount, payment_method, created_at } = req.body;
 
@@ -97,7 +97,7 @@ app.post('/user/add_data/:id', (req, res) => {
   );
 });
 
-app.get('/user/:type/:year/:id', (req, res) => {
+app.get('/api/user/:type/:year/:id', (req, res) => {
   const userId = req.params.id;
   const year = req.params.year;
   const type = req.params.type;

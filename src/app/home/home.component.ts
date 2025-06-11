@@ -14,7 +14,9 @@ export class HomeComponent implements OnInit{
 
 private detail = inject(DetailsService);
 name = 'Vinith';
-budgetData:{category:string,amount:number,payment_method:string,created_date:string}[] = [];
+incomeData:{category:string,amount:number,payment_method:string,created_date:string}[] = [];
+expenseData:{category:string,amount:number,payment_method:string,created_date:string}[] = [];
+summaryData:{category:string,amount:number,payment_method:string,created_date:string}[] = [];
 dispPLay:boolean = true;
 displayForm:boolean = false;
 formNumber:number = 0;
@@ -47,10 +49,16 @@ ngOnInit(): void {
       this.dispPLay = false;
     },5000);
     this.detail.getIncomeOrExpenseDetail("income","1").subscribe((data)=>{
-      console.log(data);
-      this.budgetData = data;
+      this.incomeData = data;
     });
 
+    this.detail.getIncomeOrExpenseDetail("Expense","1").subscribe((data)=>{
+      this.expenseData = data;
+    });
+
+    this.detail.getSummery(1).subscribe((data)=>{
+      this.summaryData = data;
+    });
     // total Income and expense
     this.detail.getTotalIncomeOrExpenseAmount("Income","1",2025).subscribe((data)=>{this.totalIncome = data;});
     this.detail.getTotalIncomeOrExpenseAmount("Expense","1",2025).subscribe((data)=>{this.totalExpense = data;});
