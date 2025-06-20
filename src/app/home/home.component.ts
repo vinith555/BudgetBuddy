@@ -19,6 +19,7 @@ expenseData:{category:string,amount:number,payment_method:string,created_date:st
 summaryData:{category:string,amount:number,payment_method:string,created_date:string}[] = [];
 dispPLay:boolean = true;
 displayForm:boolean = false;
+displayForm2:boolean = false;
 formNumber:number = 0;
 displayDeleteOption:boolean = true;
 dataToBeAdded:{type: "income" | "expense",category: string,amount: number,payment_method: string,created_at: string} = 
@@ -40,8 +41,10 @@ formData(data:{date:string,category:string,amount:number,payment_method:string})
   this.dataToBeAdded.created_at = data.date;
   if(this.formNumber == 1)this.dataToBeAdded.type = "expense";
   else this.dataToBeAdded.type = "income";
+  // console.log(data);
   this.detail.addData(this.dataToBeAdded,'1').subscribe();
   this.displayForm = false;
+  this.displayForm2 = false;
 };
 
 ngOnInit(): void {
@@ -71,7 +74,7 @@ addExpence(){
 }
 
 addIncome(){
-  this.displayForm = true;
+  this.displayForm2 = true;
   this.formNumber = 2;
 }
 }
