@@ -7,7 +7,8 @@ const con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '5114',
-  database: 'budjectbuddy'
+  database: 'budjectbuddy',
+  rowsAsArray: false
 });
 
 con.connect((err)=>{
@@ -97,6 +98,23 @@ app.post('/api/user/add_data/:id', (req, res) => {
   );
 });
 
+app.get('/api/user/category/:year/:id', (req, res) => {
+  const userId = req.params.id;
+  const year = req.params.year;
+  const sql = `
+    SELECT category, SUM(amount) AS Amount
+    FROM transactions
+    WHERE YEAR(created_at) = ? AND user_id = ? AND type = 'expense'
+    GROUP BY category`;
+  con.query(sql,[year,userId], (err, results) => {
+    if (err) {
+      console.error('SQL error:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    res.json(results); 
+  });
+});
+
 app.get('/api/user/:type/:year/:id', (req, res) => {
   const userId = req.params.id;
   const year = req.params.year;
@@ -121,25 +139,8 @@ app.get('/api/user/:type/:year/:id', (req, res) => {
   });
 });
 
-app.get('/api/user/category/:year/:id', (req, res) => {
-  const userId = req.params.id;
-  const year = req.params.year;
-  const sql = `
-    SELECT category, SUM(amount) AS Amount
-    FROM transactions
-    WHERE YEAR(created_at) = ? AND user_id = ? AND type = 'expense'
-    GROUP BY category
-  `;
-  con.query(sql, [year, userId], (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send('Database error');
-    }
-    console.log(result);
-    
-    res.send(result);
-  });
-});
+
+
 
 app.listen(5000,()=>{ console.log("Listening in port number 5000");
  });
