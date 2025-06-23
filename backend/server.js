@@ -47,7 +47,7 @@ app.get('/api/user/:type/:id', (req, res) => {
   const type = req.params.type;
 
   const sql = `
-    SELECT ts.category, ts.amount, ts.payment_method, DATE_FORMAT(ts.created_at, '%Y-%m-%d') AS created_date
+    SELECT ts.id, ts.category, ts.amount, ts.payment_method, DATE_FORMAT(ts.created_at, '%Y-%m-%d') AS created_date
     FROM transactions AS ts
     INNER JOIN users ON users.user_id = ts.user_id
     WHERE users.user_id = ? AND ts.type = ?`;
@@ -139,7 +139,24 @@ app.get('/api/user/:type/:year/:id', (req, res) => {
   });
 });
 
+app.delete('/api/user/delete/:uniqueId',(req,res)=>{
+  const uniqueId = req.params.uniqueId;
 
+  const sql = `DELETE TABLE transactions WHERE id = ?`;
+  con.query(sql,[uniqueId],(err,result)=>{
+    if (err) {
+      console.error("Error deleting user:", err);
+      return res.status(500).send({ error: 'Failed to delete user' });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).send({ message: 'User not found' });
+    }
+
+    res.status(200).send({ message: 'User deleted successfully' });
+  });
+
+});
 
 
 app.listen(5000,()=>{ console.log("Listening in port number 5000");

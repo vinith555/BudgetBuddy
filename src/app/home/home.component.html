@@ -82,7 +82,14 @@
                     <td class="md:py-2 md:px-4 py-1 px-2">{{item.created_date}}</td>
                     <td class="md:py-2 md:px-4 py-1 px-2">{{item.category}}</td>
                     <td class="md:py-2 md:px-4 py-1 px-2">{{item.amount}}</td>
-                    <td class="md:py-2 md:px-4 py-1 px-2">{{item.payment_method}}</td>
+                    <td class="md:py-2 md:px-4 py-1 px-2 relative">{{item.payment_method}} 
+                      <button
+                        class="absolute top-1 right-1 text-red-500 hover:text-red-700 text-lg font-bold focus:outline-none"
+                        title="Delete"
+                      >
+                        <i class="fas fa-trash text-xs"></i>
+                      </button>
+                    </td>
                   </tr>
                   }
                 </tbody>

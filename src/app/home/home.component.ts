@@ -14,8 +14,8 @@ export class HomeComponent implements OnInit{
 
 private detail = inject(DetailsService);
 name = 'Vinith';
-incomeData:{category:string,amount:number,payment_method:string,created_date:string}[] = [];
-expenseData:{category:string,amount:number,payment_method:string,created_date:string}[] = [];
+incomeData:{id:number,category:string,amount:number,payment_method:string,created_date:string}[] = [];
+expenseData:{id:number,category:string,amount:number,payment_method:string,created_date:string}[] = [];
 summaryData:{category:string,amount:number,payment_method:string,created_date:string}[] = [];
 dispPLay:boolean = true;
 displayForm:boolean = false;
