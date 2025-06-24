@@ -141,8 +141,8 @@ app.get('/api/user/:type/:year/:id', (req, res) => {
 
 app.delete('/api/user/delete/:uniqueId',(req,res)=>{
   const uniqueId = req.params.uniqueId;
-
-  const sql = `DELETE TABLE transactions WHERE id = ?`;
+  
+  const sql = `DELETE FROM transactions WHERE id = ?`;
   con.query(sql,[uniqueId],(err,result)=>{
     if (err) {
       console.error("Error deleting user:", err);

@@ -33,4 +33,8 @@ export class DetailsService {
   addData(data:{type: "income" | "expense",category: string,amount: number,payment_method: string,created_at: string},userId:string){
       return this.http.post(`${this.url}/add_data/${userId}`,data);
   }
+
+  deleteData(uniqueId:number){
+    return this.http.delete(`${this.url}/delete/${uniqueId}`);
+  }
 }

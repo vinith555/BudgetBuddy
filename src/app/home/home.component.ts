@@ -68,6 +68,12 @@ ngOnInit(): void {
     this.detail.getHighestExpense(1).subscribe((data)=>{this.highestExpense = data});
 }
 
+deleteRecord(id:number){
+  this.detail.deleteData(id).subscribe((err)=>{
+    console.log(err);
+  });
+}
+
 addExpence(){
   this.displayForm = true;
   this.formNumber = 1;
