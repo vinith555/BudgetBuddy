@@ -11,6 +11,6 @@ import { Router, RouterLink } from '@angular/router';
 export class LoginComponent {
     constructor(){}
     loginForm(form:NgForm){
-
+      
     }
 }

@@ -158,6 +158,19 @@ app.delete('/api/user/delete/:uniqueId',(req,res)=>{
 
 });
 
+app.post('/api/addUser',(req,res)=>{
+
+  const {user_name,email,pass_word} = req.body;
+
+  const sql = `INSERT INTO users (user_name,email,pass_word)
+  VALUES (?,?,?)`
+  con.query(sql,[user_name,email,pass_word],(err,result)=>{
+    if(err)
+      res.status(500).send("Error Creating user");
+    res.status(201).send("User created successfully");
+  })
+});
+
 
 app.listen(5000,()=>{ console.log("Listening in port number 5000");
  });
