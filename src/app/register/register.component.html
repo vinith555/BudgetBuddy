@@ -5,6 +5,18 @@
         </div>
         <form (ngSubmit)="register(form)" action="" class="space-y-4 w-full" #form = "ngForm">
             <div class="w-full">
+                <label for="name" class="block text-left text-gray-700 font-medium mb-1">UserName</label>
+                <input 
+                    id="name" 
+                    type="text" 
+                    class="border-2 border-blue-300 rounded-md h-10 w-full px-3 focus:outline-none focus:ring-2 focus:ring-[#2E8A99]" 
+                    name="name" 
+                    placeholder="Enter username"
+                    required
+                    ngModel
+                    >
+            </div>
+            <div class="w-full">
                 <label for="email" class="block text-left text-gray-700 font-medium mb-1">Email</label>
                 <input 
                     id="email" 
