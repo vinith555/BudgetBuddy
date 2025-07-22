@@ -12,6 +12,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class HomeComponent implements OnInit{
 
+constructor(){}
+
+private user_id = localStorage.getItem("user_id")+"";
+
 private detail = inject(DetailsService);
 name = 'Vinith';
 incomeData:{id:number,category:string,amount:number,payment_method:string,created_date:string}[] = [];
@@ -59,8 +63,13 @@ ngOnInit(): void {
       this.expenseData = data;
     });
 
-    this.detail.getSummery(1).subscribe((data)=>{
+    this.detail.getSummery(this.user_id).subscribe((data)=>{
+      console.log(data);
+      
       this.summaryData = data;
+    },(err)=>{
+      console.log("hello"+err);
+      
     });
     // total Income and expense
     this.detail.getTotalIncomeOrExpenseAmount("Income","1",2025).subscribe((data)=>{this.totalIncome = data;});

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -10,8 +10,10 @@ export class DetailsService {
   private http = inject(HttpClient);
   private url = `http://localhost:5000/api/user`;
 
-  getSummery(userId:number):Observable<{category:string,amount:number,payment_method:string,created_date:string}[]>{
-   return this.http.get<{category:string,amount:number,payment_method:string,created_date:string}[]>(`${this.url}/summery/${userId}`);
+  private baseHeaders = new HttpHeaders().set("Authorization","Bearer "+localStorage.getItem("token"));
+
+  getSummery(userId:string):Observable<{category:string,amount:number,payment_method:string,created_date:string}[]>{
+   return this.http.get<{category:string,amount:number,payment_method:string,created_date:string}[]>(`${this.url}/summery/${userId}`,{headers:this.baseHeaders});
   }
 
   getHighestExpense(id:number):Observable<number>{
