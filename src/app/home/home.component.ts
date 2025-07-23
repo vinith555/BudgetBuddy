@@ -12,9 +12,11 @@ import { FormsModule } from '@angular/forms';
 })
 export class HomeComponent implements OnInit{
 
-constructor(){}
+  user_id!:string;
+  constructor(){
+    this.user_id = localStorage.getItem("user_id")+"";
+  }
 
-private user_id = localStorage.getItem("user_id")+"";
 
 private detail = inject(DetailsService);
 name = 'Vinith';
@@ -46,7 +48,7 @@ formData(data:{date:string,category:string,amount:number,payment_method:string})
   if(this.formNumber == 1)this.dataToBeAdded.type = "expense";
   else this.dataToBeAdded.type = "income";
   // console.log(data);
-  this.detail.addData(this.dataToBeAdded,'1').subscribe();
+  this.detail.addData(this.dataToBeAdded,this.user_id).subscribe();
   this.displayForm = false;
   this.displayForm2 = false;
 };
@@ -55,26 +57,20 @@ ngOnInit(): void {
     setTimeout(()=>{
       this.dispPLay = false;
     },5000);
-    this.detail.getIncomeOrExpenseDetail("income","1").subscribe((data)=>{
+
+    this.detail.getIncomeOrExpenseDetail("income",this.user_id).subscribe((data)=>{
       this.incomeData = data;
     });
 
-    this.detail.getIncomeOrExpenseDetail("Expense","1").subscribe((data)=>{
+    this.detail.getIncomeOrExpenseDetail("Expense",this.user_id).subscribe((data)=>{
       this.expenseData = data;
     });
 
-    this.detail.getSummery(this.user_id).subscribe((data)=>{
-      console.log(data);
-      
-      this.summaryData = data;
-    },(err)=>{
-      console.log("hello"+err);
-      
-    });
+    this.detail.getSummery(this.user_id).subscribe((data)=>{this.summaryData = data;});
     // total Income and expense
-    this.detail.getTotalIncomeOrExpenseAmount("Income","1",2025).subscribe((data)=>{this.totalIncome = data;});
-    this.detail.getTotalIncomeOrExpenseAmount("Expense","1",2025).subscribe((data)=>{this.totalExpense = data;});
-    this.detail.getHighestExpense(1).subscribe((data)=>{this.highestExpense = data});
+    this.detail.getTotalIncomeOrExpenseAmount("Income",this.user_id,2025).subscribe((data)=>{this.totalIncome = data;});
+    this.detail.getTotalIncomeOrExpenseAmount("Expense",this.user_id,2025).subscribe((data)=>{this.totalExpense = data;});
+    this.detail.getHighestExpense(this.user_id).subscribe((data)=>{this.highestExpense = data});
 }
 
 deleteRecord(id:number){

@@ -89,6 +89,27 @@ app.post('/api/user/add_data/:id', verifyToken, (req, res) => {
   });
 });
 
+// Get Transaction Summary
+app.get('/api/user/summery/:id', verifyToken, (req, res) => {
+  const userId = req.params.id;
+  const sql = `SELECT category, amount, payment_method, DATE_FORMAT(created_at, '%Y-%m-%d') AS created_date FROM transactions WHERE user_id = ?`;
+  con.query(sql, [userId], (err, result) => {
+    if (err) return res.status(500).send("Database error");
+    res.send(result);
+  });
+});
+
+// Get Highest Transaction
+app.get('/api/user/highestTransaction/:id', verifyToken, (req, res) => {
+  const userId = req.params.id;
+  const sql = `SELECT MAX(amount) as maxAmount FROM transactions WHERE user_id = ? AND type = 'expense'`;
+  con.query(sql, [userId], (err, result) => {
+    if (err) return res.status(500).send("Database error");
+    var maxAmount = result[0].maxAmount;
+    res.send(maxAmount);
+  });
+});
+
 // Get All Transactions by Type
 app.get('/api/user/:type/:id', verifyToken, (req, res) => {
   const { type, id: userId } = req.params;
@@ -105,7 +126,8 @@ app.get('/api/user/total/:type/:year/:id', verifyToken, (req, res) => {
   const sql = `SELECT SUM(amount) as Total FROM transactions WHERE user_id = ? AND type = ? AND YEAR(created_at) = ?`;
   con.query(sql, [userId, type, year], (err, result) => {
     if (err) return res.status(500).send("Internal server error");
-    res.send({ total: result[0].Total });
+    var total = +result[0].Total;
+    res.send(total);
   });
 });
 
@@ -130,26 +152,6 @@ app.get('/api/user/:type/:year/:id/monthly', verifyToken, (req, res) => {
       monthlyData[row.month - 1] = parseFloat(row.total);
     });
     res.send(monthlyData);
-  });
-});
-
-// Get Transaction Summary
-app.get('/api/user/summery/:id', verifyToken, (req, res) => {
-  const userId = req.params.id;
-  const sql = `SELECT category, amount, payment_method, DATE_FORMAT(created_at, '%Y-%m-%d') AS created_date FROM transactions WHERE user_id = ?`;
-  con.query(sql, [userId], (err, result) => {
-    if (err) return res.status(500).send("Database error");
-    res.send(result);
-  });
-});
-
-// Get Highest Transaction
-app.get('/api/user/highestTransaction/:id', verifyToken, (req, res) => {
-  const userId = req.params.id;
-  const sql = `SELECT MAX(amount) as maxAmount FROM transactions WHERE user_id = ?`;
-  con.query(sql, [userId], (err, result) => {
-    if (err) return res.status(500).send("Database error");
-    res.send({ maxAmount: result[0].maxAmount });
   });
 });
 
