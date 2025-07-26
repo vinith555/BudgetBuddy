@@ -13,6 +13,9 @@ import { forkJoin } from 'rxjs';
   providers:[DetailsService]
 })
 export class VisualboardComponent implements OnInit{
+
+  user_id:string;
+  constructor(){this.user_id = localStorage.getItem("user_id")+"";}
   
   private detail = inject(DetailsService);
 
@@ -24,8 +27,8 @@ export class VisualboardComponent implements OnInit{
 
   ngOnInit(): void {
     forkJoin({
-    income: this.detail.getTotalIncomeOrExpenseAmount("Income", "1", this.selectedYear),
-    expense: this.detail.getTotalIncomeOrExpenseAmount("Expense", "1", this.selectedYear)
+    income: this.detail.getTotalIncomeOrExpenseAmount("Income", this.user_id, this.selectedYear),
+    expense: this.detail.getTotalIncomeOrExpenseAmount("Expense", this.user_id, this.selectedYear)
   }).subscribe(({ income, expense }) => {
     this.totalIncome = income;
     this.totalExpense = expense;
@@ -40,13 +43,13 @@ export class VisualboardComponent implements OnInit{
   });
 
     // income
-    this.detail.getIncomeOrExpenseAmount("income",this.selectedYear,"1").subscribe((data)=>{ 
+    this.detail.getIncomeOrExpenseAmount("income",this.selectedYear,this.user_id).subscribe((data)=>{ 
     this.monthlySavingChartData = {
     datasets: [{ data: data,label: 'Monthly Saving',backgroundColor:'#1E3A47',borderColor:'#2E8A99' }],
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'] };
     });
     // expense
-    this.detail.getIncomeOrExpenseAmount("expense",this.selectedYear,"1").subscribe((data)=>{
+    this.detail.getIncomeOrExpenseAmount("expense",this.selectedYear,this.user_id).subscribe((data)=>{
     this.monthlyExpenseChartData= {
     datasets: [{data: data,label: 'Monthly Expense',backgroundColor:'#1E3A47',borderColor:'#2E8A99',}],
     labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December']};
@@ -58,8 +61,8 @@ export class VisualboardComponent implements OnInit{
   console.log('Selected year:', this.selectedYear);
 
   forkJoin({
-    income: this.detail.getTotalIncomeOrExpenseAmount("Income", "1", this.selectedYear),
-    expense: this.detail.getTotalIncomeOrExpenseAmount("Expense", "1", this.selectedYear)
+    income: this.detail.getTotalIncomeOrExpenseAmount("Income", this.user_id, this.selectedYear),
+    expense: this.detail.getTotalIncomeOrExpenseAmount("Expense", this.user_id, this.selectedYear)
   }).subscribe(({ income, expense }) => {
     this.totalIncome = income;
     this.totalExpense = expense;
@@ -73,13 +76,13 @@ export class VisualboardComponent implements OnInit{
     };
   });
   
-  this.detail.getIncomeOrExpenseAmount("income",this.selectedYear,"1").subscribe((data)=>{ 
+  this.detail.getIncomeOrExpenseAmount("income",this.selectedYear,this.user_id).subscribe((data)=>{ 
     this.monthlySavingChartData = {
     datasets: [{ data: data,label: 'Monthly Saving',backgroundColor:'#1E3A47',borderColor:'#2E8A99' }],
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'] };
     });
 
-    this.detail.getIncomeOrExpenseAmount("expense",this.selectedYear,"1").subscribe((data)=>{
+    this.detail.getIncomeOrExpenseAmount("expense",this.selectedYear,this.user_id).subscribe((data)=>{
     this.monthlyExpenseChartData= {
     datasets: [{data: data,label: 'Monthly Expense',backgroundColor:'#1E3A47',borderColor:'#2E8A99',}],
     labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December']};

@@ -29,7 +29,7 @@ export class DetailsService {
   }
 
   getIncomeOrExpenseAmount(type:string,year:number,userId:string):Observable<number[]>{
-    return this.http.get<number[]>(`${this.url}/${type}/${year}/${userId}`,{headers:this.baseHeaders});
+    return this.http.get<number[]>(`${this.url}/monthly/${type}/${year}/${userId}`,{headers:this.baseHeaders});
   }
 
   addData(data:{type: "income" | "expense",category: string,amount: number,payment_method: string,created_at: string},userId:string){

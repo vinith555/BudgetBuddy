@@ -132,17 +132,17 @@ app.get('/api/user/total/:type/:year/:id', verifyToken, (req, res) => {
 });
 
 // Get Category-wise Expense for Year
-app.get('/api/user/category/:year/:id', verifyToken, (req, res) => {
-  const { year, id: userId } = req.params;
-  const sql = `SELECT category, SUM(amount) AS Amount FROM transactions WHERE YEAR(created_at) = ? AND user_id = ? AND type = 'expense' GROUP BY category`;
-  con.query(sql, [year, userId], (err, results) => {
-    if (err) return res.status(500).json({ error: 'Database error' });
-    res.json(results);
-  });
-});
+// app.get('/api/user/category/:year/:id', verifyToken, (req, res) => {
+//   const { year, id: userId } = req.params;
+//   const sql = `SELECT category, SUM(amount) AS Amount FROM transactions WHERE YEAR(created_at) = ? AND user_id = ? AND type = 'expense' GROUP BY category`;
+//   con.query(sql, [year, userId], (err, results) => {
+//     if (err) return res.status(500).json({ error: 'Database error' });
+//     res.json(results);
+//   });
+// });
 
 // Get Monthly Summary
-app.get('/api/user/:type/:year/:id/monthly', verifyToken, (req, res) => {
+app.get('/api/user/monthly/:type/:year/:id', verifyToken, (req, res) => {
   const { type, year, id: userId } = req.params;
   const sql = `SELECT MONTH(created_at) AS month, SUM(amount) AS total FROM transactions WHERE type = ? AND YEAR(created_at) = ? AND user_id = ? GROUP BY MONTH(created_at) ORDER BY MONTH(created_at)`;
   con.query(sql, [type, year, userId], (err, results) => {
