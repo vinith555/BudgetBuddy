@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class LogindetailsService {
 
   constructor(private http:HttpClient) { }
-  private url = `http://localhost:5000/api`;
+  private url = `http://localhost:5000/api/user`;
   addUser(data:{user_name:string,email:string,pass_word:string}){
     return this.http.post(`${this.url}/register`,data);
   }
